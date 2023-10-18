@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.4 on win32)" generated="20231017 15:52:59.247" rpa="false" schemaversion="4">
+<suite id="s1" name="ScripTestCase" source="D:\MFAF\Robot\domainservice\MyAISDomain\LivingNetwork\NetworkEventBus\5GModeResourceActivation\ScripTestCase.robot">
+<test id="s1-t1" name="test" line="10">
+<kw name="ConnectSecureCRTLog1" library="SecureCRT">
+<arg>${HostURL_10.137.45.30}</arg>
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${HostURL}</arg>
+<arg>timeout=1 hour</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20231017 15:52:59.750" endtime="20231017 15:52:59.750"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>serveradm</arg>
+<arg>otsohkmv'</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20231017 15:52:59.750" level="INFO">Logging into '10.137.45.30:22' as 'serveradm'.</msg>
+<msg timestamp="20231017 15:53:01.182" level="INFO">Read output: 
+This computer system is property of Advanced Info Service Public Company Limited (AIS) and
+must be accessed only by authorized users. Any unauthorized use of this system is strictly prohibited
+and deemed as violation to AIS'­s regulation on Information Technology and Computer System
+Security of Telecommunication and Wireless Business (Regulation). The unauthorized user or any
+person who breaches AIS'­s Regulation, policy, criteria and/or memorandums regarding IT Security
+will be punished by AIS and may be subject to criminal prosecution.
+All data contained within the systems is owned by AIS. The data may be monitored, intercepted,
+recorded, read, copied, or captured and disclosed in any manner by authorized personnel for
+prosecutions and other purposes according to AIS's Regulation.
+Any communication on or information stored within the system, including information stored locally
+on the hard drive or other media in use with this unit (e.g., floppy disks, PDAs and other hand-held
+peripherals, Handy drives, CD-ROMs, etc.), is also owned by AIS. AIS have all rights to manage such
+information.
+Please contact IT Support if you encounter any computer problem.
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Register this system with Red Hat Insights: insights-client --register
+Create an account or view all your systems at https://red.ht/insights-dashboard
+Last login: Tue Oct 17 15:48:38 2023 from 10.239.129.177
+[?2004h[serveradm@DMASTERSQA0001 ~]$</msg>
+<status status="PASS" starttime="20231017 15:52:59.750" endtime="20231017 15:53:01.182"/>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<arg>su root</arg>
+<arg>loglevel=DEBUG</arg>
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<status status="PASS" starttime="20231017 15:53:01.182" endtime="20231017 15:53:01.201"/>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<var>${output}</var>
+<arg>delay=1s</arg>
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20231017 15:53:03.203" level="INFO">[?2004lPassword:</msg>
+<msg timestamp="20231017 15:53:03.203" level="INFO">${output} = [?2004lPassword: </msg>
+<status status="PASS" starttime="20231017 15:53:01.201" endtime="20231017 15:53:03.203"/>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<arg>otsohkmv'</arg>
+<arg>loglevel=DEBUG</arg>
+<doc>Writes the given ``text`` on the remote machine and appends a newline.</doc>
+<status status="PASS" starttime="20231017 15:53:03.203" endtime="20231017 15:53:03.234"/>
+</kw>
+<kw name="Read" library="SSHLibrary">
+<var>${output}</var>
+<arg>delay=1s</arg>
+<doc>Consumes and returns everything available on the server output.</doc>
+<msg timestamp="20231017 15:53:05.236" level="INFO">[?2004h[root@DMASTERSQA0001 serveradm]#</msg>
+<msg timestamp="20231017 15:53:05.236" level="INFO">${output} = [?2004h[root@DMASTERSQA0001 serveradm]# </msg>
+<status status="PASS" starttime="20231017 15:53:03.234" endtime="20231017 15:53:05.236"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${output}</arg>
+<arg>root@</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20231017 15:53:05.236" endtime="20231017 15:53:05.236"/>
+</kw>
+<status status="PASS" starttime="20231017 15:52:59.750" endtime="20231017 15:53:05.236"/>
+</kw>
+<kw name="SetLogNull_NSB" library="Keyword_5GMode">
+<arg>${NameCmdFileLog_5GModeResourceActivation}</arg>
+<arg>${PathLogNSB}</arg>
+<kw name="Execute Command" library="SSHLibrary">
+<var>${filename}</var>
+<arg>find ${pathLog}/ -type f -mmin -5 -prune | grep ${Command_Name} |cut -d '/' -f8</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20231017 15:53:05.240" level="INFO">Executing command 'find /LOCAL-NAS/livingnetwork/deb/deb-5g-mode-resource-activation/logs/log/ -type f -mmin -5 -prune | grep deb-5g-mode-resource-activation-5755f48758-9h9qv_MFAF_ |cut -d '/' -f8'.</msg>
+<msg timestamp="20231017 15:53:05.291" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20231017 15:53:05.291" level="INFO">${filename} = deb-5g-mode-resource-activation-5755f48758-9h9qv_MFAF_202310170000.log</msg>
+<status status="PASS" starttime="20231017 15:53:05.236" endtime="20231017 15:53:05.291"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${filename}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20231017 15:53:05.291" level="INFO">deb-5g-mode-resource-activation-5755f48758-9h9qv_MFAF_202310170000.log</msg>
+<status status="PASS" starttime="20231017 15:53:05.291" endtime="20231017 15:53:05.291"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${filename}&quot; != &quot;&quot;">
+<kw name="Execute Command" library="SSHLibrary">
+<arg>echo "" &gt; ${pathLog}/${filename}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20231017 15:53:05.291" level="INFO">Executing command 'echo "" &gt; /LOCAL-NAS/livingnetwork/deb/deb-5g-mode-resource-activation/logs/log/deb-5g-mode-resource-activation-5755f48758-9h9qv_MFAF_202310170000.log'.</msg>
+<msg timestamp="20231017 15:53:05.381" level="INFO">Command exited with return code 1.</msg>
+<status status="PASS" starttime="20231017 15:53:05.291" endtime="20231017 15:53:05.381"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20231017 15:53:07.381" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20231017 15:53:05.381" endtime="20231017 15:53:07.381"/>
+</kw>
+<status status="PASS" starttime="20231017 15:53:05.291" endtime="20231017 15:53:07.381"/>
+</branch>
+<status status="PASS" starttime="20231017 15:53:05.291" endtime="20231017 15:53:07.381"/>
+</if>
+<status status="PASS" starttime="20231017 15:53:05.236" endtime="20231017 15:53:07.381"/>
+</kw>
+<status status="PASS" starttime="20231017 15:52:59.750" endtime="20231017 15:53:07.381"/>
+</test>
+<status status="PASS" starttime="20231017 15:52:59.247" endtime="20231017 15:53:07.381"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="ScripTestCase">ScripTestCase</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
