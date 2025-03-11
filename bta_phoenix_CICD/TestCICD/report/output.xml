@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.9.13 on win32)" generated="20250311 12:09:17.668" rpa="false" schemaversion="4">
+<suite id="s1" name="3" source="D:\CICD\bta_phoenix_CICD\TestCICD\3.robot">
+<test id="s1-t1" name="Get user profile success" line="35">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>https://reqres.in</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250311 12:09:17.976" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250311 12:09:17.976" endtime="20250311 12:09:17.976"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${RES}</var>
+<arg>mysession</arg>
+<arg>/api/users/12</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250311 12:09:18.146" level="INFO">GET Request : url=https://reqres.in/api/users/12 
+ path_url=/api/users/12 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250311 12:09:18.146" level="INFO">GET Response : url=https://reqres.in/api/users/12 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 11 Mar 2025 05:09:18 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1741589518&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=Pc2b4kUA2B8EhX%2FzsmRI%2FcbMQ8ZtfNcAf8vzH144%2BUA%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1741589518&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=Pc2b4kUA2B8EhX%2FzsmRI%2FcbMQ8ZtfNcAf8vzH144%2BUA%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"156-dRpOqAStViWxQQvYl7n1A1GXGFw"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '165', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '91e889f47c7e4048-SIN', 'Content-Encoding': 'gzip', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=28880&amp;min_rtt=28519&amp;rtt_var=10952&amp;sent=5&amp;recv=6&amp;lost=0&amp;retrans=0&amp;sent_bytes=2834&amp;recv_bytes=771&amp;delivery_rate=143062&amp;cwnd=252&amp;unsent_bytes=0&amp;cid=6af9837d42787fd9&amp;ts=54&amp;x=0"'} 
+ body={"data":{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"},"support":{"url":"https://contentcaddy.io?utm_source=reqres&amp;utm_medium=json&amp;utm_campaign=referral","text":"Tired of writing endless social media content? Let Content Caddy generate it for you."}} 
+ </msg>
+<msg timestamp="20250311 12:09:18.146" level="INFO">C:\Python\lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20250311 12:09:18.146" level="INFO">${RES} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20250311 12:09:17.976" endtime="20250311 12:09:18.146"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${RES}</var>
+<arg>${RES.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250311 12:09:18.146" level="INFO">${RES} = {'data': {'id': 12, 'email': 'rachel.howell@reqres.in', 'first_name': 'Rachel', 'last_name': 'Howell', 'avatar': 'https://reqres.in/img/faces/12-image.jpg'}, 'support': {'url': 'https://contentcaddy.i...</msg>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.146"/>
+</kw>
+<kw name="GetDataAndVerify">
+<arg>${Exp_data}</arg>
+<arg>${RES}</arg>
+<arg>${Param}</arg>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${Exp_list}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20250311 12:09:18.146" level="INFO">Length is 5</msg>
+<msg timestamp="20250311 12:09:18.146" level="INFO">${length} = 5</msg>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.146"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${length}</value>
+<iter>
+<var name="${i}">0</var>
+<for flavor="IN">
+<var>${Param}</var>
+<var>${Exp}</var>
+<value>${Param_list}</value>
+<value>${Exp_list}</value>
+<iter>
+<var name="${Param}">['id', 'email', 'first_name', 'last_name', 'avatar']</var>
+<var name="${Exp}">['12', 'rachel.howell@reqres.in', 'Rachel', 'Howell', 'https://reqres.in/img/faces/12-image.jpg']</var>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${Act}</var>
+<arg>${Json}</arg>
+<arg>$..${Param}[${i}]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20250311 12:09:18.212" level="INFO">${Act} = [12]</msg>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.212"/>
+</kw>
+<kw name="ReplaceStrings">
+<var>${Act}</var>
+<arg>${Act}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20250311 12:09:18.213" level="INFO">${JSON} = [12]</msg>
+<status status="PASS" starttime="20250311 12:09:18.213" endtime="20250311 12:09:18.213"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>['</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">${JSON} = [12]</msg>
+<status status="PASS" starttime="20250311 12:09:18.213" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>']</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">${JSON} = [12]</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>[</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">${JSON} = 12]</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>]</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">${JSON} = 12</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${JSON}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">12</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<return>
+<value>${JSON}</value>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</return>
+<msg timestamp="20250311 12:09:18.215" level="INFO">${Act} = 12</msg>
+<status status="PASS" starttime="20250311 12:09:18.212" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20250311 12:09:18.215" level="INFO">12</msg>
+<msg timestamp="20250311 12:09:18.215" level="INFO">12</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.215"/>
+</kw>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.215"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.215"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.215"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<for flavor="IN">
+<var>${Param}</var>
+<var>${Exp}</var>
+<value>${Param_list}</value>
+<value>${Exp_list}</value>
+<iter>
+<var name="${Param}">['id', 'email', 'first_name', 'last_name', 'avatar']</var>
+<var name="${Exp}">['12', 'rachel.howell@reqres.in', 'Rachel', 'Howell', 'https://reqres.in/img/faces/12-image.jpg']</var>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${Act}</var>
+<arg>${Json}</arg>
+<arg>$..${Param}[${i}]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20250311 12:09:18.252" level="INFO">${Act} = ['rachel.howell@reqres.in']</msg>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.252"/>
+</kw>
+<kw name="ReplaceStrings">
+<var>${Act}</var>
+<arg>${Act}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20250311 12:09:18.253" level="INFO">${JSON} = ['rachel.howell@reqres.in']</msg>
+<status status="PASS" starttime="20250311 12:09:18.252" endtime="20250311 12:09:18.253"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>['</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.254" level="INFO">${JSON} = rachel.howell@reqres.in']</msg>
+<status status="PASS" starttime="20250311 12:09:18.253" endtime="20250311 12:09:18.254"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>']</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.254" level="INFO">${JSON} = rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.254" endtime="20250311 12:09:18.254"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>[</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.255" level="INFO">${JSON} = rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.254" endtime="20250311 12:09:18.255"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>]</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.256" level="INFO">${JSON} = rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.255" endtime="20250311 12:09:18.256"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${JSON}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250311 12:09:18.256" level="INFO">rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.256" endtime="20250311 12:09:18.256"/>
+</kw>
+<return>
+<value>${JSON}</value>
+<status status="PASS" starttime="20250311 12:09:18.256" endtime="20250311 12:09:18.256"/>
+</return>
+<msg timestamp="20250311 12:09:18.257" level="INFO">${Act} = rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.252" endtime="20250311 12:09:18.257"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20250311 12:09:18.257" level="INFO">rachel.howell@reqres.in</msg>
+<msg timestamp="20250311 12:09:18.257" level="INFO">rachel.howell@reqres.in</msg>
+<status status="PASS" starttime="20250311 12:09:18.257" endtime="20250311 12:09:18.257"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250311 12:09:18.257" endtime="20250311 12:09:18.257"/>
+</kw>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.257"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.257"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.215" endtime="20250311 12:09:18.257"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<for flavor="IN">
+<var>${Param}</var>
+<var>${Exp}</var>
+<value>${Param_list}</value>
+<value>${Exp_list}</value>
+<iter>
+<var name="${Param}">['id', 'email', 'first_name', 'last_name', 'avatar']</var>
+<var name="${Exp}">['12', 'rachel.howell@reqres.in', 'Rachel', 'Howell', 'https://reqres.in/img/faces/12-image.jpg']</var>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${Act}</var>
+<arg>${Json}</arg>
+<arg>$..${Param}[${i}]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${Act} = ['Rachel']</msg>
+<status status="PASS" starttime="20250311 12:09:18.258" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="ReplaceStrings">
+<var>${Act}</var>
+<arg>${Act}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${JSON} = ['Rachel']</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>['</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${JSON} = Rachel']</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>']</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${JSON} = Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>[</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${JSON} = Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>]</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${JSON} = Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${JSON}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<return>
+<value>${JSON}</value>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</return>
+<msg timestamp="20250311 12:09:18.281" level="INFO">${Act} = Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20250311 12:09:18.281" level="INFO">Rachel</msg>
+<msg timestamp="20250311 12:09:18.281" level="INFO">Rachel</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.281"/>
+</kw>
+<status status="PASS" starttime="20250311 12:09:18.258" endtime="20250311 12:09:18.281"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.257" endtime="20250311 12:09:18.281"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.257" endtime="20250311 12:09:18.281"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<for flavor="IN">
+<var>${Param}</var>
+<var>${Exp}</var>
+<value>${Param_list}</value>
+<value>${Exp_list}</value>
+<iter>
+<var name="${Param}">['id', 'email', 'first_name', 'last_name', 'avatar']</var>
+<var name="${Exp}">['12', 'rachel.howell@reqres.in', 'Rachel', 'Howell', 'https://reqres.in/img/faces/12-image.jpg']</var>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${Act}</var>
+<arg>${Json}</arg>
+<arg>$..${Param}[${i}]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${Act} = ['Howell']</msg>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="ReplaceStrings">
+<var>${Act}</var>
+<arg>${Act}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${JSON} = ['Howell']</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>['</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${JSON} = Howell']</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>']</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${JSON} = Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>[</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${JSON} = Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>]</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${JSON} = Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${JSON}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<return>
+<value>${JSON}</value>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</return>
+<msg timestamp="20250311 12:09:18.306" level="INFO">${Act} = Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20250311 12:09:18.306" level="INFO">Howell</msg>
+<msg timestamp="20250311 12:09:18.306" level="INFO">Howell</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.306"/>
+</kw>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.306"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.306"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.281" endtime="20250311 12:09:18.306"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<for flavor="IN">
+<var>${Param}</var>
+<var>${Exp}</var>
+<value>${Param_list}</value>
+<value>${Exp_list}</value>
+<iter>
+<var name="${Param}">['id', 'email', 'first_name', 'last_name', 'avatar']</var>
+<var name="${Exp}">['12', 'rachel.howell@reqres.in', 'Rachel', 'Howell', 'https://reqres.in/img/faces/12-image.jpg']</var>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${Act}</var>
+<arg>${Json}</arg>
+<arg>$..${Param}[${i}]</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20250311 12:09:18.343" level="INFO">${Act} = ['https://reqres.in/img/faces/12-image.jpg']</msg>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.343"/>
+</kw>
+<kw name="ReplaceStrings">
+<var>${Act}</var>
+<arg>${Act}</arg>
+<kw name="Convert To String" library="BuiltIn">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20250311 12:09:18.344" level="INFO">${JSON} = ['https://reqres.in/img/faces/12-image.jpg']</msg>
+<status status="PASS" starttime="20250311 12:09:18.343" endtime="20250311 12:09:18.344"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>['</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.344" level="INFO">${JSON} = https://reqres.in/img/faces/12-image.jpg']</msg>
+<status status="PASS" starttime="20250311 12:09:18.344" endtime="20250311 12:09:18.345"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>']</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.345" level="INFO">${JSON} = https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.345" endtime="20250311 12:09:18.345"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>[</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.346" level="INFO">${JSON} = https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.345" endtime="20250311 12:09:18.346"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${JSON}</var>
+<arg>${JSON}</arg>
+<arg>]</arg>
+<arg>${empty}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20250311 12:09:18.347" level="INFO">${JSON} = https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.346" endtime="20250311 12:09:18.347"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${JSON}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250311 12:09:18.347" level="INFO">https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.347" endtime="20250311 12:09:18.347"/>
+</kw>
+<return>
+<value>${JSON}</value>
+<status status="PASS" starttime="20250311 12:09:18.347" endtime="20250311 12:09:18.347"/>
+</return>
+<msg timestamp="20250311 12:09:18.347" level="INFO">${Act} = https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.343" endtime="20250311 12:09:18.347"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20250311 12:09:18.348" level="INFO">https://reqres.in/img/faces/12-image.jpg</msg>
+<msg timestamp="20250311 12:09:18.348" level="INFO">https://reqres.in/img/faces/12-image.jpg</msg>
+<status status="PASS" starttime="20250311 12:09:18.348" endtime="20250311 12:09:18.348"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${Exp}[${i}]</arg>
+<arg>${Act}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20250311 12:09:18.348" endtime="20250311 12:09:18.348"/>
+</kw>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.348"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.348"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.306" endtime="20250311 12:09:18.348"/>
+</iter>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.348"/>
+</for>
+<status status="PASS" starttime="20250311 12:09:18.146" endtime="20250311 12:09:18.348"/>
+</kw>
+<doc>API https://reqres.in/api/users/12
+1. Verify response status code should be ‘200’
+2. Compare the response body with expected below.
+‘ID’ == 12
+‘Email’ == rachel.howell@reqres.in
+‘First Name’ == Rachel
+‘Last Name’ == Howell
+‘Avatar’ == https://reqres.in/img/faces/12-image.jpg</doc>
+<tag>200</tag>
+<status status="PASS" starttime="20250311 12:09:17.976" endtime="20250311 12:09:18.349"/>
+</test>
+<test id="s1-t2" name="Get user profile but user not found" line="51">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>https://reqres.in</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250311 12:09:18.351" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250311 12:09:18.351" endtime="20250311 12:09:18.351"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${RES}</var>
+<arg>mysession</arg>
+<arg>/api/users/1234</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250311 12:09:18.496" level="INFO">GET Request : url=https://reqres.in/api/users/1234 
+ path_url=/api/users/1234 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250311 12:09:18.496" level="INFO">GET Response : url=https://reqres.in/api/users/1234 
+ status=404, reason=Not Found 
+ headers={'Date': 'Tue, 11 Mar 2025 05:09:18 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '2', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1741669627&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=zbiAHRZHD7Ord24zBcheN0C2hAQo3O1xVI0d9rQG8aQ%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1741669627&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=zbiAHRZHD7Ord24zBcheN0C2hAQo3O1xVI0d9rQG8aQ%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '131', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '91e889f6ac9df902-SIN', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=29442&amp;min_rtt=29413&amp;rtt_var=11089&amp;sent=5&amp;recv=6&amp;lost=0&amp;retrans=0&amp;sent_bytes=2835&amp;recv_bytes=773&amp;delivery_rate=137600&amp;cwnd=252&amp;unsent_bytes=0&amp;cid=afee74bd136698c1&amp;ts=60&amp;x=0"'} 
+ body={} 
+ </msg>
+<msg timestamp="20250311 12:09:18.496" level="INFO">C:\Python\lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20250311 12:09:18.496" level="INFO">${RES} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20250311 12:09:18.352" endtime="20250311 12:09:18.496"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${RES}</var>
+<arg>${RES.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250311 12:09:18.496" level="INFO">${RES} = {}</msg>
+<status status="PASS" starttime="20250311 12:09:18.496" endtime="20250311 12:09:18.496"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${empty}</arg>
+<arg>${RES}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20250311 12:09:18.496" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20250311 12:09:18.496" endtime="20250311 12:09:18.496"/>
+</kw>
+<doc>API https://reqres.in/api/users/1234
+1. Verify response status code should be ‘404’.
+2. Response body should be '{}'</doc>
+<tag>404</tag>
+<status status="PASS" starttime="20250311 12:09:18.350" endtime="20250311 12:09:18.496"/>
+</test>
+<status status="PASS" starttime="20250311 12:09:17.670" endtime="20250311 12:09:18.505"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">200</stat>
+<stat pass="1" fail="0" skip="0">404</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="3">3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
