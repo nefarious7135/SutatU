@@ -1,0 +1,7 @@
+*** Settings ***
+Library     Selenium2Library
+Resource    Resources/variables/Variables_Common.robot   
+Resource    Resources/Locators/Locator_Login.robot   
+Resource    Resources/Keywords/preparedata.robot
+Resource    Resources/Keywords/Common.robot
+Resource    Resources/Keywords/CommonDB.robot

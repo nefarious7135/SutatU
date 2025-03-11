@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.9.13 on win32)" generated="20250311 12:07:06.378" rpa="false" schemaversion="4">
+<suite id="s1" name="Test4" source="D:\CICD\bta_phoenix_CICD\TestCases\test4.robot">
+<test id="s1-t1" name="Get user profile but user not found" line="51">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>https://reqres.in</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250311 12:07:06.772" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250311 12:07:06.772" endtime="20250311 12:07:06.772"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${RES}</var>
+<arg>mysession</arg>
+<arg>/api/users/1234</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250311 12:07:07.767" level="INFO">GET Request : url=https://reqres.in/api/users/1234 
+ path_url=/api/users/1234 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20250311 12:07:07.767" level="INFO">GET Response : url=https://reqres.in/api/users/1234 
+ status=404, reason=Not Found 
+ headers={'Date': 'Tue, 11 Mar 2025 05:07:07 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '2', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1741669627&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=zbiAHRZHD7Ord24zBcheN0C2hAQo3O1xVI0d9rQG8aQ%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1741669627&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=zbiAHRZHD7Ord24zBcheN0C2hAQo3O1xVI0d9rQG8aQ%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'EXPIRED', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '91e886c2ade7fd9a-SIN', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=32348&amp;min_rtt=31463&amp;rtt_var=12431&amp;sent=6&amp;recv=6&amp;lost=0&amp;retrans=0&amp;sent_bytes=2835&amp;recv_bytes=773&amp;delivery_rate=129676&amp;cwnd=252&amp;unsent_bytes=0&amp;cid=37ade6aab2ff7939&amp;ts=787&amp;x=0"'} 
+ body={} 
+ </msg>
+<msg timestamp="20250311 12:07:07.767" level="INFO">C:\Python\lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20250311 12:07:07.767" level="INFO">${RES} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20250311 12:07:06.772" endtime="20250311 12:07:07.767"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${RES}</var>
+<arg>${RES.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250311 12:07:07.767" level="INFO">${RES} = {}</msg>
+<status status="PASS" starttime="20250311 12:07:07.767" endtime="20250311 12:07:07.767"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${empty}</arg>
+<arg>${RES}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20250311 12:07:07.767" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20250311 12:07:07.767" endtime="20250311 12:07:07.767"/>
+</kw>
+<doc>API https://reqres.in/api/users/1234
+1. Verify response status code should be ‘404’.
+2. Response body should be '{}'</doc>
+<tag>404</tag>
+<status status="PASS" starttime="20250311 12:07:06.772" endtime="20250311 12:07:07.767"/>
+</test>
+<status status="PASS" starttime="20250311 12:07:06.378" endtime="20250311 12:07:07.767"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">404</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test4">Test4</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
